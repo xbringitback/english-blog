@@ -32,13 +32,13 @@ NotionMagicLinkEmailProps) => (
           Hello, you have been added to the Newsletter
         </Text>
         <Section style={buttonContainer}>
-          <Button style={button} href="http://localhost:3000/">
+          <Button style={button} href="https://english-blog-mu.vercel.app/">
             Confirm subscription
           </Button>
         </Section>
         <Text style={footer}>
           <Link
-            href="http://localhost:3000/"
+            href="https://english-blog-mu.vercel.app/"
             target="_blank"
             style={{ ...link, color: "#8E9A5B" }}
           >
