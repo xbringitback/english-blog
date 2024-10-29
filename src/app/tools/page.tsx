@@ -19,7 +19,7 @@ const Tools = () => {
                     <p className="text">
                       Learning English can be challenging, but with the right
                       resources and a clear plan, progress can be made quickly.
-                      Here's a list of proven tools, helpful software and
+                      Here&apos;s a list of proven tools, helpful software and
                       valuable tips to help you write, read and speak English.
                     </p>
                   </div>

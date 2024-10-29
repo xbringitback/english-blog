@@ -4,7 +4,6 @@ import {
   Head,
   Heading,
   Html,
-  Img,
   Link,
   Preview,
   Text,
@@ -17,13 +16,12 @@ interface NotionMagicLinkEmailProps {
   loginCode?: string;
 }
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "";
+// const baseUrl = process.env.VERCEL_URL
+//   ? `https://${process.env.VERCEL_URL}`
+//   : "";
 
-export const NotionMagicLinkEmail = ({
-  loginCode,
-}: NotionMagicLinkEmailProps) => (
+export const NotionMagicLinkEmail = ({}: // loginCode,
+NotionMagicLinkEmailProps) => (
   <Html>
     <Head />
     <Preview>English-Newsletter</Preview>

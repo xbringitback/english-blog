@@ -72,7 +72,7 @@ const SearchResults = () => {
         <article className="max-w-full p-6 bg-white shadow-md lg:rounded-md lg:border-2 lg:mb-4">
           <div className="">
             <h2 className="text-3xl font-bold mb-4">
-              Search Results for: "{query}"
+              Search Results for: &quot;{query}&quot;
             </h2>
             {posts.length > 0 ? (
               <ul className="">

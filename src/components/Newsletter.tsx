@@ -24,7 +24,7 @@ const Newsletter: React.FC = () => {
         console.error("Error sending email");
       }
     } catch (error) {
-      console.error("An unexpected error occurred.");
+      console.error("An unexpected error occurred.", error);
     } finally {
       setLoading(false);
     }

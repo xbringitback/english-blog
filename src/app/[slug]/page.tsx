@@ -80,7 +80,10 @@ const DetailPage = ({ params }: { params: { slug: string } }) => {
                 </div>
                 <div className="">
                   {post.additionalSections.map(
-                    (section: any, index: number) => (
+                    (
+                      section: { title: string; content: string },
+                      index: number
+                    ) => (
                       <div key={index} className="mb-8">
                         <h3 className="font-semibold text-2xl leading-8 text-accent mb-4">
                           {section.title}

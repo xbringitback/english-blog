@@ -1,6 +1,7 @@
 import AllArticles from "@/components/AllArticles";
 import RecentPosts from "@/components/RecentPosts";
 import SearchResults from "@/app/search/SearchResults";
+import { Suspense } from "react";
 
 const SearchPage = () => {
   return (
@@ -8,7 +9,9 @@ const SearchPage = () => {
       <div className="flex flex-col lg:pb-12">
         <div className="flex max-lg:flex-col mb-8">
           <div className="lg:max-w-[65%] lg:mr-8">
-            <SearchResults />
+            <Suspense fallback={<div>Loading...</div>}>
+              <SearchResults />
+            </Suspense>
             <RecentPosts />
           </div>
           <div>
