@@ -12,7 +12,7 @@ const RecentPosts: React.FC = () => {
     <article className="max-w-full mx-auto p-6 lg:mb-4 bg-white shadow-md lg:rounded-md lg:border-2">
       <h2 className="text-3xl font-bold mb-4">Recent Posts</h2>
       <ul className="space-y-4">
-        {(posts || []).slice(-5).map((post) => (
+        {(posts || []).slice(0, 5).map((post) => (
           <li key={post.id} className="border-b pb-4">
             <Link href={`/${post.id}`}>
               <h3 className="text-2xl font-semibold text-accent hover:underline hover:text-accent-hover mb-1">
