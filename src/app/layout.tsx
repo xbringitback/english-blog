@@ -3,6 +3,7 @@ import "./globals.css";
 import { Noto_Sans_Georgian } from "next/font/google";
 import Header from "../components/Header";
 import AuthProvider from "@/providers/AuthProvider";
+import Logo from "../../public/assets/logo.png";
 
 const NotoSansGeorgian = Noto_Sans_Georgian({
   subsets: ["latin"],
@@ -11,8 +12,9 @@ const NotoSansGeorgian = Noto_Sans_Georgian({
 });
 
 export const metadata: Metadata = {
-  title: "Journey To Fluent English",
+  title: "English Journey",
   description: "English-Blog",
+  icons: [{ rel: "icon", url: Logo.src }],
 };
 
 export default function RootLayout({

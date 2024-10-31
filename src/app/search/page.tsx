@@ -3,6 +3,12 @@ import RecentPosts from "@/components/RecentPosts";
 import SearchResults from "@/app/search/SearchResults";
 import { Suspense } from "react";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Search post",
+};
+
 const SearchPage = () => {
   return (
     <div className="lg:container lg:mx-auto h-full">

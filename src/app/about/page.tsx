@@ -1,6 +1,12 @@
 import AllArticles from "@/components/AllArticles";
 import RecentPosts from "@/components/RecentPosts";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About me",
+};
+
 const About = () => {
   return (
     <>

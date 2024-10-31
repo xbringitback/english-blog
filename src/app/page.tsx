@@ -2,7 +2,12 @@ import AllArticles from "@/components/AllArticles";
 import Newsletter from "@/components/Newsletter";
 import RecentPosts from "@/components/RecentPosts";
 import SearchPosts from "@/components/SearchPosts";
-import React from "react";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home",
+};
 
 const Home: React.FC = () => {
   return (

@@ -3,6 +3,12 @@ import RecentPosts from "@/components/RecentPosts";
 import Link from "next/link";
 import { tools } from "@/libs/constants";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tools",
+};
+
 const Tools = () => {
   return (
     <>
