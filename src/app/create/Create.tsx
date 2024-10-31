@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { createdPost } from "@/libs/constants";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 
 const CreatePost: React.FC = () => {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   const [loading, setLoading] = useState<boolean>(false);
+  const mainContentRef = useRef<HTMLTextAreaElement>(null);
+  const sectionRefs = useRef<(HTMLTextAreaElement | null)[]>([]);
   const router = useRouter();
   const [post, setPost] = useState<createdPost>({
     mainTitle: "",
@@ -17,6 +19,48 @@ const CreatePost: React.FC = () => {
     id: "",
     additionalSections: [],
   });
+
+  const makeTextBold = (type: "main" | "section", index?: number) => {
+    let textarea: HTMLTextAreaElement | null = null;
+    if (type === "main") {
+      textarea = mainContentRef.current;
+    } else if (type === "section" && index !== undefined) {
+      textarea = sectionRefs.current[index];
+    }
+
+    if (textarea) {
+      const { selectionStart, selectionEnd } = textarea;
+      const content =
+        type === "main"
+          ? post.mainContent
+          : post.additionalSections[index!].content;
+      const selectedText = content.substring(selectionStart, selectionEnd);
+      const newText =
+        content.substring(0, selectionStart) +
+        "**" +
+        selectedText +
+        "**" +
+        content.substring(selectionEnd);
+
+      if (type === "main") {
+        setPost({ ...post, mainContent: newText });
+      } else if (type === "section" && index !== undefined) {
+        const updatedSections = [...post.additionalSections];
+        updatedSections[index] = {
+          ...updatedSections[index],
+          content: newText,
+        };
+        setPost({ ...post, additionalSections: updatedSections });
+      }
+
+      // Re-focus and set cursor position
+      setTimeout(() => {
+        textarea!.focus();
+        textarea!.selectionStart = selectionStart + 2;
+        textarea!.selectionEnd = selectionEnd + 2;
+      }, 0);
+    }
+  };
 
   const handleMainChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -83,13 +127,13 @@ const CreatePost: React.FC = () => {
     }
   };
 
-  if (session?.user.role !== "admin") {
-    return (
-      <div className="flex justify-center items-center">
-        Du hast keine Berechtigung, diese Seite zu sehen!
-      </div>
-    );
-  }
+  // if (session?.user.role !== "admin") {
+  //   return (
+  //     <div className="flex justify-center items-center">
+  //       Du hast keine Berechtigung, diese Seite zu sehen!
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="lg:container lg:mx-auto h-full">
@@ -120,12 +164,21 @@ const CreatePost: React.FC = () => {
                     required
                   />
                 </div>
-                <div className="border-b pb-6">
-                  <label htmlFor="" className="font-semibold">
+                <div className="flex flex-wrap justify-between border-b pb-6">
+                  <label htmlFor="" className="font-semibold items-start">
                     Main Content
                   </label>
+                  <button
+                    type="button"
+                    onClick={() => makeTextBold("main")}
+                    className="px-2 font-black rounded"
+                  >
+                    B
+                  </button>
                   <textarea
+                    ref={mainContentRef}
                     name="mainContent"
+                    id="mainContent"
                     value={post.mainContent}
                     onChange={handleMainChange}
                     className="w-full px-4 py-2 h-[300px] border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-gray-800 focus:border-gray-800 text-premium"
@@ -161,11 +214,21 @@ const CreatePost: React.FC = () => {
                           required
                         />
                       </div>
-                      <div>
+                      <div className="flex flex-wrap justify-between">
                         <label className="block font-semibold">
                           Section Content {index + 1}
                         </label>
+                        <button
+                          type="button"
+                          onClick={() => makeTextBold("section", index)}
+                          className="px-2 font-black rounded"
+                        >
+                          B
+                        </button>
                         <textarea
+                          ref={(el) => {
+                            sectionRefs.current[index] = el;
+                          }}
                           name="content"
                           value={section.content}
                           onChange={(e) => handleSectionChange(index, e)}

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { createdPost } from "@/libs/constants";
 import { useFetch } from "@/hooks/getPosts";
+import ReactMarkdown from "react-markdown";
 
 const RecentPosts: React.FC = () => {
   const { data: posts } = useFetch<createdPost[]>("/api/posts");
@@ -31,7 +32,7 @@ const RecentPosts: React.FC = () => {
               </Link>
             </div>
             <div className="">
-              <p>{post.mainContent}</p>
+              <ReactMarkdown>{post.mainContent}</ReactMarkdown>
             </div>
           </li>
         ))}

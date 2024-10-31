@@ -7,6 +7,7 @@ import { createdPost } from "@/libs/constants";
 import { useFetch } from "@/hooks/getPosts";
 import SearchPosts from "@/components/SearchPosts";
 import { RiExpandUpDownFill } from "react-icons/ri";
+import ReactMarkdown from "react-markdown";
 
 import { format } from "date-fns";
 import Link from "next/link";
@@ -28,7 +29,7 @@ const DetailPage = ({ params }: { params: { slug: string } }) => {
       <div className="flex flex-col lg:pb-12">
         <div className="flex max-lg:flex-col mb-8">
           <div className="lg:max-w-[65%] lg:mr-8">
-            <article className="max-w-full p-6 bg-white shadow-md lg:rounded-md lg:border-2 lg:mb-4">
+            <article className="max-w-full p-6 bg-white shadow-md lg:rounded-md lg:border-2 lg:mb-4 whitespace-pre-wrap">
               <div className="border-b">
                 <div className="border-b mb-8">
                   <h3 className="text-3xl font-semibold text-accent mb-1">
@@ -46,7 +47,9 @@ const DetailPage = ({ params }: { params: { slug: string } }) => {
                     </Link>
                   </div>
                   <div className="flex flex-col justify-center">
-                    <p className="mb-8">{post.mainContent}</p>
+                    <div className="mb-6">
+                      <ReactMarkdown>{post.mainContent}</ReactMarkdown>
+                    </div>
                     <div className="px-2">
                       <div
                         className="flex justify-between mb-2 cursor-pointer"
@@ -89,7 +92,7 @@ const DetailPage = ({ params }: { params: { slug: string } }) => {
                           {section.title}
                         </h3>
                         <div className="">
-                          <p className="">{section.content}</p>
+                          <ReactMarkdown>{section.content}</ReactMarkdown>
                         </div>
                       </div>
                     )
