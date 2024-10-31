@@ -3,10 +3,10 @@
 import { useRef, useState } from "react";
 import { createdPost } from "@/libs/constants";
 import { useRouter } from "next/navigation";
-// import { useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const CreatePost: React.FC = () => {
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
   const [loading, setLoading] = useState<boolean>(false);
   const mainContentRef = useRef<HTMLTextAreaElement>(null);
   const sectionRefs = useRef<(HTMLTextAreaElement | null)[]>([]);
@@ -127,13 +127,13 @@ const CreatePost: React.FC = () => {
     }
   };
 
-  // if (session?.user.role !== "admin") {
-  //   return (
-  //     <div className="flex justify-center items-center">
-  //       Du hast keine Berechtigung, diese Seite zu sehen!
-  //     </div>
-  //   );
-  // }
+  if (session?.user.role !== "admin") {
+    return (
+      <div className="flex justify-center items-center">
+        Du hast keine Berechtigung, diese Seite zu sehen!
+      </div>
+    );
+  }
 
   return (
     <div className="lg:container lg:mx-auto h-full">
@@ -221,7 +221,7 @@ const CreatePost: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => makeTextBold("section", index)}
-                          className="px-2 font-black rounded"
+                          className="font-black rounded"
                         >
                           B
                         </button>
